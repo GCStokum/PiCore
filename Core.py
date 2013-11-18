@@ -1,14 +1,18 @@
                                                                                #
+#v.0.0.003
 # Hello, This is an entry into my own Python based, RPi intended (to start with
 # open and free game framework
 # and will probably be a start point for a colaborative series.
+
 
 # also, MIT license <here> :P
 
 #import antigravity
 
 import pygame
+import random
 
+random.seed()
 print('Hello.')
 
 screenWidth = 800
@@ -36,7 +40,7 @@ magenta = (255, 0, 255)
 
 running = True
 
-bgColour = (35, 35, 35)
+bgColour = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
 
 y = 0
 dir = 1
