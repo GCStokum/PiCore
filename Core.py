@@ -1,5 +1,5 @@
                                                                                #
-#v.0.0.003
+#v.0.0.005
 # Hello, This is an entry into my own Python based, RPi intended (to start with
 # open and free game framework
 # and will probably be a start point for a colaborative series.
@@ -58,6 +58,7 @@ while running == True:
     while x <= screenWidth:
         pygame.draw.line(screen, (red), (bottomLeft), (x, 0))
         pygame.draw.line(screen, (blue), (bottomRight), (x, 0))
+        pygame.draw.line(screen, (random.randint(0,255),random.randint(0,255),random.randint(0,255)), (screenWidth / 2, screenHeight), (x, 0))
         x += 2
         pygame.display.flip()
 
