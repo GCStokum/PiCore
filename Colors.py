@@ -1,8 +1,6 @@
                                                                                 #
-
-'''
-Colour Bits
-'''
+# v.0.0.005
+# Colour Bits
 
 black = (0, 0, 0)
 grey10 = (25, 25, 25)
