@@ -10,16 +10,16 @@
 #import antigravity
 
 import pygame
-import random
+import random as r
 import Colors as rgb
 
 # Primary Engine Bits
-clock = pygame.time.Clock()
 running = True
 myMousePos = myMouseClick = (0, 0)
 screenWidth = 800
 screenHeight = 600
 screen = pygame.display.set_mode((screenWidth, screenHeight))
+clock = pygame.time.Clock()
 
 # Secondary 
 topLeft = (1, 1)
@@ -27,9 +27,9 @@ bottomLeft = (1 , screenHeight - 1)
 topRight = (screenWidth - 1, 1)
 bottomRight = (screenWidth - 1, screenHeight -1)
 
-bgColour = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+bgColour = (r.randint(0,255), r.randint(0,255), r.randint(0,255))
 
-random.seed()
+r.seed()
 
 
 # Let's start doing some stuff
@@ -51,7 +51,7 @@ while running:
         else:
             print (event.type)  # Whatelse is going on here?
 
-    clock.tick(20)  # Let our CPU rest and do other things for a few cycles
+    clock.tick(250)  # Let our CPU rest and do other things for a few cycles
 
     
     ''' LOGIC '''
@@ -59,8 +59,13 @@ while running:
     ''' DISPLAY / OUTPUT '''
     screen.fill(bgColour)
 
+    x = r.randint(0, screenWidth-1)
+    y = r.randint(0, screenHeight-1)
+    screen.set_at((x, y), (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255)))
+    
+
     pygame.draw.line(screen, (rgb.red), (bottomLeft), (myMousePos))
     pygame.draw.line(screen, (rgb.blue), (bottomRight), (myMousePos))
-    pygame.draw.line(screen, (random.randint(0,255),random.randint(0,255),random.randint(0,255)), (screenWidth / 2, screenHeight), (myMouseClick))
+    pygame.draw.line(screen, (r.randint(0,255),r.randint(0,255),r.randint(0,255)), (screenWidth / 2, screenHeight), (myMouseClick))
 
     pygame.display.flip()
