@@ -1,5 +1,5 @@
                                                                                #
-#v.0.1.001
+#v.0.1.010
 # Hello, This is an entry into my own Python based, RPi intended (to start with
 # open and free game framework
 # and will probably be a start point for a colaborative series.
@@ -21,7 +21,12 @@ screenHeight = 600
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
 
-# Secondary 
+# Secondary
+Up = (0, -1)
+Down = (0, 1)
+Left = (-1, 0)
+Right = (1, 0)
+
 topLeft = (1, 1)
 bottomLeft = (1 , screenHeight - 1)
 topRight = (screenWidth - 1, 1)
@@ -36,7 +41,7 @@ r.seed()
 print('Hello.')
 while running:
 
-    ''' INPUT '''
+    ''' INPUT / CONTROL '''
     for event in pygame.event.get():  # Poll only on event instead of constantly
         if event.type == pygame.QUIT:
             print('Goodbye!')
@@ -48,6 +53,15 @@ while running:
         elif event.type == pygame.MOUSEMOTION:
             print('Mouse @', event.pos)
             myMousePos = event.pos
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                print('Up')                
+            elif event.key == pygame.K_DOWN:
+                print('Down')
+            elif event.key == pygame.K_LEFT:
+                print('Left')
+            elif event.key == pygame.K_RIGHT:
+                print('Right')
         else:
             print (event.type)  # Whatelse is going on here?
 
