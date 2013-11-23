@@ -12,6 +12,7 @@
 import pygame
 import random as r
 import Colors as rgb
+import Vectors as v
 
 # Primary Engine Bits
 running = True
@@ -32,7 +33,7 @@ bottomLeft = (1 , screenHeight - 1)
 topRight = (screenWidth - 1, 1)
 bottomRight = (screenWidth - 1, screenHeight -1)
 
-bgColour = (r.randint(0,255), r.randint(0,255), r.randint(0,255))
+bgColour = (0, 127, r.randint(0,255))
 
 r.seed()
 
@@ -69,6 +70,7 @@ while running:
 
     
     ''' LOGIC '''
+
     
     ''' DISPLAY / OUTPUT '''
     screen.fill(bgColour)
