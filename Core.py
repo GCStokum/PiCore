@@ -1,5 +1,5 @@
                                                                                #
-#v.0.1.010
+#v.0.1.012
 # Hello, This is an entry into my own Python based, RPi intended (to start with
 # open and free game framework
 # and will probably be a start point for a colaborative series.
@@ -37,6 +37,25 @@ bgColour = (0, 127, r.randint(0,255))
 
 r.seed()
 
+
+# TODO : define entity (enemy / player)  this will then be transfered to Entity.py or some such file
+class entity:
+    def __init__(self):pass
+
+    def feed(self, e):
+        # self is now +e's nutrition etc.
+        print('Nom!')
+
+    def purge(self, e):
+        print('Burp!')
+        
+    def die(self):
+        print('Goodbye Cruel World!')
+
+
+def kill(e):
+    if e is entity:
+        e.die()
 
 # Let's start doing some stuff
 print('Hello.')
