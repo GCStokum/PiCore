@@ -56,10 +56,16 @@ class entity:
         
     def die(self):
         print('Goodbye Cruel World!')
-
 def kill(e):
     if e is entity:
         e.die()
+
+
+def drawBlob(pos):
+    pygame.draw.ellipse ( screen , rgb.green , [ (pos[0] - 30), (pos[1] - 15) , 60 , 30 ] , 2 )
+    pygame.draw.ellipse ( screen , rgb.green , [ (pos[0] - 15), (pos[1] - 30) , 30 , 60 ] , 2 )
+    
+    
 
 # Let's start doing some stuff
 print('Hello.')
@@ -74,6 +80,8 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print('Mouse Click @', event.pos)
             myMouseClick = event.pos
+            screen.blit(drawBlob(event.pos), event.pos)
+            drawBlob(event.pos)
         elif event.type == pygame.MOUSEMOTION:
             print('Mouse @', event.pos)
             myMousePos = event.pos
@@ -120,7 +128,7 @@ while running:
         # this is how to concatinate string bits :
         # text = font.render("Score: "+str(score),True,black)
 
-        # Put the image of the text on the screen at 250x250
+        # Put the image of the text on the screen at x and y
         screen.blit(text, [5,5])
     
         text = font.render("Clicked @ " + str(myMouseClick), True, rgb.yellow)
