@@ -14,6 +14,8 @@ import random as r
 import Colors as rgb
 import Vectors as v
 
+import Worm
+
 # Primary Engine Bits
 Debug = True
 running = True
@@ -56,16 +58,16 @@ class entity:
         
     def die(self):
         print('Goodbye Cruel World!')
+
+
 def kill(e):
     if e is entity:
         e.die()
 
 
-def drawBlob(pos):
-    pygame.draw.ellipse ( screen , rgb.green , [ (pos[0] - 30), (pos[1] - 15) , 60 , 30 ] , 2 )
-    pygame.draw.ellipse ( screen , rgb.green , [ (pos[0] - 15), (pos[1] - 30) , 30 , 60 ] , 2 )
-    
-    
+def draw(entity):
+    # Blah
+    pass
 
 # Let's start doing some stuff
 print('Hello.')
