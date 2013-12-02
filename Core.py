@@ -80,8 +80,6 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print('Mouse Click @', event.pos)
             myMouseClick = event.pos
-            screen.blit(drawBlob(event.pos), event.pos)
-            drawBlob(event.pos)
         elif event.type == pygame.MOUSEMOTION:
             print('Mouse @', event.pos)
             myMousePos = event.pos
