@@ -14,10 +14,10 @@ import random as r
 import Colors as rgb
 import Vectors as v
 
-import Worm
+import Worm as w
 
 # Primary Engine Bits
-Debug = True
+Debug = False
 running = True
 myMousePos = myMouseClick = (0, 0)
 screenWidth = 800
@@ -40,9 +40,13 @@ bottomLeft = (1 , screenHeight - 1)
 topRight = (screenWidth - 1, 1)
 bottomRight = (screenWidth - 1, screenHeight -1)
 
-bgColour = (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
+bgColour = (rgb.white)
+#bgColour = (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
 
 r.seed()
+
+#Game specifics here
+myW = w.Worm(screen, 400, 300, 0, 200)
 
 
 # TODO : define entity (enemy / player)  this will then be transfered to Entity.py or some such file
@@ -71,7 +75,12 @@ def draw(entity):
 
 # Let's start doing some stuff
 print('Hello.')
+
 while running:
+
+    myW.move()
+
+    myW.draw()
 
     ''' INPUT / CONTROL Below '''
     for event in pygame.event.get():  # Poll only on event instead of constantly
@@ -86,6 +95,7 @@ while running:
             print('Mouse @', event.pos)
             myMousePos = event.pos
         elif event.type == pygame.KEYDOWN:
+            myW.key_event(event)
             if event.key == pygame.K_UP:
                 print('Up')                
             elif event.key == pygame.K_DOWN:
@@ -102,12 +112,14 @@ while running:
 
     
     ''' LOGIC Below '''
-
+    if myW.crashed or myW.x <= 0 or myW.x >= screenWidth - 1 or myW.y <= 0 or myW.y >= screenHeight - 1:
+        print ("Crash!")
+        running = False
     ''' LOGIC Above '''
 
     
     ''' DISPLAY / OUTPUT Below '''
-    screen.fill(bgColour)
+#    screen.fill(bgColour)
 
     '''
     # Set Pixel Color at point
@@ -116,10 +128,12 @@ while running:
     screen.set_at((x, y), (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255)))
     '''
 
+    '''
     pygame.draw.line(screen, (rgb.red), (bottomLeft), (myMousePos),2)
     pygame.draw.line(screen, (rgb.blue), (bottomRight), (myMousePos),2)
     pygame.draw.line(screen, (r.randint(0,255),r.randint(0,255),r.randint(0,255)), (screenWidth / 2, screenHeight), (myMouseClick),3)
-
+    '''
+    
     if Debug == True:
         # Render the text. "True" means anti-aliased text. 
         # Black is the color. This creates an image of the 

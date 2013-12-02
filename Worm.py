@@ -4,10 +4,13 @@
 ALMOST a self contained "Worm" or Tron like game that's implemented in CORE
 '''
 
+import pygame
+import Colors as rgb
+
 class Worm:
     ''' A Worm '''
 
-    def __init__(self, surface, x, y, length):
+    def __init__(self, surface, x, y, z, length):
         self.surface = surface
         self.x = x
         self.y = y
@@ -41,7 +44,7 @@ class Worm:
     def move(self):
         self.x += self.dir_x
         self.y += self.dir_y
-        #  self.z += self.dir_z
+        self.z += self.dir_z
 
         if (self.x, self.y, self.z) in self.body:
             self.crashed = True
@@ -53,4 +56,9 @@ class Worm:
 
     def draw(self):
         for x, y in self.body:
+            #pygame.draw.circle((self.surface), rgb.red, (x, y), 5, width=0)
             self.surface.set_at((x, y), (rgb.white))
+            self.surface.set_at((x+1, y), (rgb.white))
+            self.surface.set_at((x-1, y), (rgb.white))
+            self.surface.set_at((x, y+1), (rgb.white))
+            self.surface.set_at((x, y-1), (rgb.white))
