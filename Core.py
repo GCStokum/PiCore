@@ -4,11 +4,9 @@
 # open and free game framework
 # and will probably be a start point for a colaborative series.
 
-
 # also, MIT license <here> :P
 
 #import antigravity
-
 import pygame
 import random as r
 import Colors as rgb
