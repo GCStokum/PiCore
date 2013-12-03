@@ -1,5 +1,5 @@
                                                                                #
-#v.0.1.015
+#v.0.2.05
 # Hello, This is an entry into my own Python based, RPi intended (to start with
 # open and free game framework
 # and will probably be a start point for a colaborative series.
@@ -14,16 +14,28 @@ import random as r
 import Colors as rgb
 import Vectors as v
 
-import Worm as w
+WormGame = False
+if WormGame:
+    import Worm as w
 
 # Primary Engine Bits
-Debug = False
+Debug = True
 running = True
 myMousePos = myMouseClick = (0, 0)
 screenWidth = 800
 screenHeight = 600
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
+
+pygame.init()
+
+joystick_count = pygame.joystick.get_count()
+print ("There is ", joystick_count, "joystick/s")
+if joystick_count == 0:
+    print ("Error, I did not find any joysticks")
+else:
+    my_joystick = pygame.joystick.Joystick(0)
+    my_joystick.init()
 
 pygame.font.init()  # Needed if no pygame.init() safe to call multiple times
 # Select the font to use. Default font, 25 pt size.
@@ -40,15 +52,15 @@ bottomLeft = (1 , screenHeight - 1)
 topRight = (screenWidth - 1, 1)
 bottomRight = (screenWidth - 1, screenHeight -1)
 
-bgColour = (rgb.white)
-#bgColour = (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
+bgColour = (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
 
 r.seed()
 
 #Game specifics here
-myW = w.Worm(screen, 400, 300, 0, 200)
+if WormGame:
+    myW = w.Worm(screen, 400, 300, 0, 200)  # (screen, x, y, z, length)
 
-
+"BLAH BLAH BLAH"
 # TODO : define entity (enemy / player)  this will then be transfered to Entity.py or some such file
 class entity:
     def __init__(self):pass
@@ -63,25 +75,25 @@ class entity:
     def die(self):
         print('Goodbye Cruel World!')
 
-
 def kill(e):
     if e is entity:
         e.die()
 
-
 def draw(entity):
     # Blah
     pass
+"BLAH BLAH BLAH"
+
 
 # Let's start doing some stuff
 print('Hello.')
 
 while running:
+    if WormGame:
+        myW.move()
+        myW.draw()
 
-    myW.move()
-
-    myW.draw()
-
+    ''' ##################### '''
     ''' INPUT / CONTROL Below '''
     for event in pygame.event.get():  # Poll only on event instead of constantly
         if event.type == pygame.QUIT:
@@ -95,7 +107,10 @@ while running:
             print('Mouse @', event.pos)
             myMousePos = event.pos
         elif event.type == pygame.KEYDOWN:
-            myW.key_event(event)
+
+            if WormGame:
+                myW.key_event(event)  # CONTROL to WORM
+
             if event.key == pygame.K_UP:
                 print('Up')                
             elif event.key == pygame.K_DOWN:
@@ -104,22 +119,29 @@ while running:
                 print('Left')
             elif event.key == pygame.K_RIGHT:
                 print('Right')
+        elif event.type == pygame.JOYBUTTONDOWN:
+            print("Joystick button : ", event)
+        #elif event.type == pygame.JOYBUTTONUP:
+            #print("Joystick button released.")
         else:
-            print (event.type)  # Whatelse is going on here?
+            print (event.type)  # What else is going on here?
 
-    clock.tick(250)  # Let our CPU rest and do other things for a few cycles
+    clock.tick(50)  # Let our CPU rest and do other things for a few cycles
     ''' INPUT / CONTROL Above '''
+    ''' #####################  '''
 
-    
+    ''' ########### '''
     ''' LOGIC Below '''
-    if myW.crashed or myW.x <= 0 or myW.x >= screenWidth - 1 or myW.y <= 0 or myW.y >= screenHeight - 1:
-        print ("Crash!")
-        running = False
+    if WormGame:
+        if myW.crashed or myW.x <= 0 or myW.x >= screenWidth - 1 or myW.y <= 0 or myW.y >= screenHeight - 1:
+            print ("Crash!")
+            running = False
     ''' LOGIC Above '''
+    ''' ########### '''
 
-    
+    ''' ###################### '''
     ''' DISPLAY / OUTPUT Below '''
-#    screen.fill(bgColour)
+    screen.fill(bgColour)
 
     '''
     # Set Pixel Color at point
@@ -128,13 +150,11 @@ while running:
     screen.set_at((x, y), (r.randint(0, 255), r.randint(0, 255), r.randint(0, 255)))
     '''
 
-    '''
-    pygame.draw.line(screen, (rgb.red), (bottomLeft), (myMousePos),2)
-    pygame.draw.line(screen, (rgb.blue), (bottomRight), (myMousePos),2)
-    pygame.draw.line(screen, (r.randint(0,255),r.randint(0,255),r.randint(0,255)), (screenWidth / 2, screenHeight), (myMouseClick),3)
-    '''
+    if Debug:
+        pygame.draw.line(screen, (rgb.red), (bottomLeft), (myMousePos),2)
+        pygame.draw.line(screen, (rgb.blue), (bottomRight), (myMousePos),2)
+        pygame.draw.line(screen, (r.randint(0,255),r.randint(0,255),r.randint(0,255)), (screenWidth / 2, screenHeight), (myMouseClick),3)
     
-    if Debug == True:
         # Render the text. "True" means anti-aliased text. 
         # Black is the color. This creates an image of the 
         # letters, but does not put it on the screen
@@ -151,3 +171,4 @@ while running:
     # Blit the screen as final part of Display
     pygame.display.flip()
     ''' DISPLAY / OUTPUT Above '''
+    ''' ###################### '''
