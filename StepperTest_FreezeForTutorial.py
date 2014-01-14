@@ -10,8 +10,8 @@ DirPin = 17
 x = 0
 pause = 0.001
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(StepPin, GPIO.OUT)
+GPIO.setup(DirPin, GPIO.OUT)
 
 while x <= 10:
     print(x)
